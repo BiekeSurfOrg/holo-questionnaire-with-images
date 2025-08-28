@@ -57,7 +57,7 @@ function ItemList() {
                         <span className='color-black score-text'>Score {score}/5 </span>
                     </div>
                 )
-            ) : (<ScanYourCard direction='right' result={score} />)}
+            ) : (<ScanYourCard direction='left' result={score} />)}
             <div></div>
         </div>
     );
