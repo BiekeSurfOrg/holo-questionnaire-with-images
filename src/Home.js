@@ -5,7 +5,7 @@ const Home = () => {
 
     return (
         <div className="full-screen position-relative">
-            <video  muted  id="myVideo" className='background-video'> {/* autoPlay loop */}
+            <video autoPlay loop muted  id="myVideo" className='background-video'>
                 <source src="../assets/background.mp4" type="video/mp4" />
             </video>
             <div className="full-screen layout">
