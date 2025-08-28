@@ -1,7 +1,7 @@
 import React from 'react';
 import Results from './Results';
 import { useRouteChange } from './navigation';
-const ScanYourCard = ({ direction = 'right', result }) => {
+const ScanYourCard = ({ direction = 'left', result }) => {
     const routeChange = useRouteChange();
     setTimeout(() => {
         routeChange('/');
