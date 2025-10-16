@@ -5,9 +5,9 @@ const Card = ({ text, route, img }) => {
     const routeChange = useRouteChange();
     return (
         <div className="card" onClick={() => routeChange(route)}>
-            <img src={"/assets/" + img} class="tile-image" alt={text || "Card Image"} />
-            <div class="tile-description-area">
-                <span class="tile-description"> {text}</span>
+            <img src={"/assets/" + img} className="tile-image" alt={text || "Card Image"} />
+            <div className="tile-description-area">
+                <span className="tile-description"> {text}</span>
             </div>
         </div>
     );
