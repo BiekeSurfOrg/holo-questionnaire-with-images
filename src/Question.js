@@ -1,34 +1,44 @@
-function Question({ question, description, onUpdate, answers, correctAnswer }) {
+function Question({
+  question,
+  description,
+  onUpdate,
+  answerA,
+  answerB,
+  correctAnswer,
+}) {
+  const handleUpdate = (answer) => {
+    return onUpdate(answer === correctAnswer);
+  };
 
-    const handleUpdate = (answer) => {
-        onUpdate(checkForCorrectAnswer(answer));
-    };
+  return (
+    <div>
+      <div className="question">
+        <h3 className="margin-left-right">{question}</h3>
+        <p className="margin-left-right">{description}</p>
 
-    const checkForCorrectAnswer = (answer) => {
-        if (answer === correctAnswer) {
-            return true;
-        }
-        return false;
-    };
-
-    return (
-        <div>
-            <div className="question">
-                <h3 className="margin-left-right">{question}</h3>
-                <p className="margin-left-right">{description}</p>
-                {answers.map((currentAnswer, index) => (
-
-                    <button
-                        className="no-bg-button"
-                        onClick={() => handleUpdate(currentAnswer.text)}
-                        key={`${index}-${currentAnswer || "test"}`}
-                    >
-                        <img src={`../assets/${currentAnswer.image}.png`} alt={currentAnswer.text} className="answer-image" />
-                    </button>
-                ))}
-            </div>
-        </div>
-    );
+        <button
+          className="no-bg-button"
+          onClick={() => handleUpdate(answerA.text)}
+        >
+          <img
+            src={`../assets/${answerA.image}.png`}
+            alt={"Security example one"}
+            className="answer-image"
+          />
+        </button>
+        <button
+          className="no-bg-button"
+          onClick={() => handleUpdate(answerB.text)}
+        >
+          <img
+            src={`../assets/${answerB.image}.png`}
+            alt={"Security example two"}
+            className="answer-image"
+          />
+        </button>
+      </div>
+    </div>
+  );
 }
 
 export default Question;

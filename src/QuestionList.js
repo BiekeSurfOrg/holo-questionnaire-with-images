@@ -1,36 +1,31 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Question from "./Question";
-import questions from "./questions";
+import updatedQuestions from "./questions";
 import ScanYourCard from "./scanYourCard";
 import HeaderComp from "./HeaderComp";
 
 function ItemList() {
-    
-    const [selectedItem, setSelectedItem] = useState(null);
-    const [score, setScore] = useState(0);
-    const [answeredQuestions, setansweredQuestions] = useState(1);
-    const [questionList, setQuestionList] = useState(questions['security']);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [score, setScore] = useState(0);
 
-    useEffect(() => {
-        getRandomQuestion();
-    }, []);
+  const [selectedItem, setSelectedItem] = useState(null);
 
-    const getRandomQuestion = () => {
-        // TODO: get a random question from a pool for this question index
+  useEffect(() => {
+    getRandomQuestion();
+  }, []); // eslint-disable-line
 
-      if (questionList.length > 0) {
-        const randomIndex = Math.floor(Math.random() * questionList.length);
-        const selectedItem = questionList[randomIndex];
-        setSelectedItem(selectedItem);
-        setQuestionList(questionList.filter((item) => item.id !== selectedItem.id));
-      }
-    };
+  const getRandomQuestion = () => {
+    const randomIndex = Math.floor(
+      Math.random() * updatedQuestions[currentQuestionIndex].length
+    );
+    setSelectedItem(updatedQuestions[currentQuestionIndex][randomIndex]);
+  };
 
-    const handleQuestionUpdate = (updatedInfo) => {
+  const handleQuestionUpdate = (updatedInfo) => {
     if (updatedInfo === true) {
       setScore(score + 1);
     }
-    setansweredQuestions(answeredQuestions + 1);
+    setCurrentQuestionIndex((currentQuestionIndex) => currentQuestionIndex + 1);
     getRandomQuestion();
   };
 
@@ -38,13 +33,14 @@ function ItemList() {
     <div className="question-list full-screen">
       <HeaderComp />
 
-      {answeredQuestions <= 5 ? (
+      {currentQuestionIndex <= 4 ? (
         selectedItem && (
           <div>
             <Question
-              question={`Question ${answeredQuestions}`}
-              description={selectedItem.description}
-              answers={selectedItem.answers}
+              question={`Question ${currentQuestionIndex + 1}`}
+              description={"Which is the most secure option"}
+              answerA={selectedItem.answerA}
+              answerB={selectedItem.answerB}
               correctAnswer={selectedItem.correctAnswer}
               onUpdate={handleQuestionUpdate}
             />
@@ -54,7 +50,6 @@ function ItemList() {
       ) : (
         <ScanYourCard direction="left" result={score} />
       )}
-      <div></div>
     </div>
   );
 }

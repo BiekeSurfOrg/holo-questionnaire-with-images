@@ -10,7 +10,7 @@ const Home = () => {
             </video>
             <div className="full-screen layout">
                 <div className='tile-list'>
-                    <Card text='Start the Quiz' route='/questions?type=security' img={'Button3.png'} />
+                    <Card text='Start the Quiz' route='/questions' img={'Button3.png'} />
                 </div>
             </div>
         </div>
