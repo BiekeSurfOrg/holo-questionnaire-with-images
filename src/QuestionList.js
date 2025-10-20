@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Question from "./Question";
 import updatedQuestions from "./questions";
 import ScanYourCard from "./scanYourCard";
-import HeaderComp from "./HeaderComp";
+// import HeaderComp from "./HeaderComp";
 
 function ItemList() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -15,10 +15,12 @@ function ItemList() {
   }, []); // eslint-disable-line
 
   const getRandomQuestion = () => {
-    const randomIndex = Math.floor(
-      Math.random() * updatedQuestions[currentQuestionIndex].length
-    );
-    setSelectedItem(updatedQuestions[currentQuestionIndex][randomIndex]);
+    if(updatedQuestions.length > currentQuestionIndex){
+      const randomIndex = Math.floor(
+        Math.random() * updatedQuestions[currentQuestionIndex].length
+      );
+      setSelectedItem(updatedQuestions[currentQuestionIndex][randomIndex]);
+    }
   };
 
   const handleQuestionUpdate = (updatedInfo) => {
@@ -29,9 +31,15 @@ function ItemList() {
     getRandomQuestion();
   };
 
+  const restartGame = () => {
+    setScore(0);
+    setCurrentQuestionIndex(0);
+    getRandomQuestion();
+  };
+
   return (
     <div className="question-list full-screen">
-      <HeaderComp />
+      {/* <HeaderComp /> */}
 
       {currentQuestionIndex <= 4 ? (
         selectedItem && (
@@ -48,7 +56,7 @@ function ItemList() {
           </div>
         )
       ) : (
-        <ScanYourCard direction="left" result={score} />
+        <ScanYourCard direction="left" result={score} restartGame={() => restartGame()} />
       )}
     </div>
   );
