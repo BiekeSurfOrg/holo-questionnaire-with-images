@@ -40,7 +40,7 @@ function ItemList() {
   };
 
   return (
-    <div className="question-list full-screen">
+    <div className="question-list">
       {/* <HeaderComp /> */}
 
       {currentQuestionIndex <= 4 ? (
