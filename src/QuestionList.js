@@ -7,6 +7,7 @@ import ScanYourCard from "./scanYourCard";
 function ItemList() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
+  const [questionBinaryInt, setQuestionBinaryInt] = useState((Math.random()>=0.5)? 1 : 0);
 
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -20,6 +21,7 @@ function ItemList() {
         Math.random() * updatedQuestions[currentQuestionIndex].length
       );
       setSelectedItem(updatedQuestions[currentQuestionIndex][randomIndex]);
+      setQuestionBinaryInt((Math.random()>=0.5)? 1 : 0);
     }
   };
 
@@ -47,8 +49,8 @@ function ItemList() {
             <Question
               question={`Question ${currentQuestionIndex + 1}`}
               description={"Which is the most secure option"}
-              answerA={selectedItem.answerA}
-              answerB={selectedItem.answerB}
+              answerA={questionBinaryInt ? selectedItem.answerA : selectedItem.answerB}
+              answerB={questionBinaryInt ? selectedItem.answerB : selectedItem.answerA}
               correctAnswer={selectedItem.correctAnswer}
               onUpdate={handleQuestionUpdate}
             />
